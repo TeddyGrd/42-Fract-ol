@@ -25,11 +25,18 @@ void put_pixel_image(t_pixel pixel, char *str, int len) {
     str[(pixel.x * 4) + (len * 4 * pixel.y) + 3] = 0;
 }
 
-void set_color(t_color *color, int red, int green, int blue)
-{
-    color->red = red;
-    color->green = green;
-    color->blue = blue;
+void set_color(t_color *color, int iterations) {
+    // Utiliser des fonctions trigonométriques pour des variations psychédéliques à l'intérieur de Mandelbrot
+    if (iterations == 1000) {
+        // La limite n'a pas été atteinte, attribuer une couleur spécifique (ici, noir)
+        color->red = 0;
+        color->green = 0;
+        color->blue = 0;
+    } else {
+        color->red = (sin(0.05 * iterations) + 1.0) * 128;
+        color->green = (sin(0.1 * iterations) + 1.0) * 128;
+        color->blue = (sin(0.15 * iterations) + 1.0) * 128;
+    }
 }
 
 void	initialize_mandelbrot(t_fractal *mandelbrot)
@@ -66,14 +73,13 @@ void draw_mandelbrot(char *image, t_fractal *fractal) {
                 iterations++;
             }
 
-            set_color(&color, (iterations) % 256, (iterations * 2) % 256, (iterations * 4) % 256);
+            set_color(&color,iterations);
 
             pixel.x = x;
             pixel.y = y;
             pixel.color = (color.red << 16) | (color.green << 8) | color.blue;
 
             put_pixel_image(pixel, image, WIDTH);
-
             x++;
         }
         y++;
