@@ -25,11 +25,13 @@ void put_pixel_image(t_pixel pixel, char *str, int len) {
     str[(pixel.x * 4) + (len * 4 * pixel.y) + 3] = 0;
 }
 
-void set_color(t_color *color, int red, int green, int blue) {
-    color->red = red;
-    color->green = green;
-    color->blue = blue;
+void set_color(t_color *color, int iterations) {
+    // Utiliser l'itération pour obtenir des variations de couleurs
+    color->red = (sin(0.05 * iterations) + 1.0) * 90;
+    color->green = (sin(0.1 * iterations) + 1.0) * 100;
+    color->blue = (sin(0.15 * iterations) + 1.0) * 110;
 }
+
 
 void draw_julia(char *image, t_fractal *julia) {
     int x = 0, y = 0;
@@ -57,7 +59,7 @@ void draw_julia(char *image, t_fractal *julia) {
                 }
             }
 
-            set_color(&color, (iterations) % 256, (iterations * 2) % 256, (iterations * 4) % 256);
+			set_color(&color, iterations);
 
             pixel.x = x;
             pixel.y = y;
