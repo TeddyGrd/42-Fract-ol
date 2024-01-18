@@ -41,14 +41,6 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	initialize_mandelbrot(t_fractal *mandelbrot)
-{
-    mandelbrot->min.real = -2.0;
-    mandelbrot->min.imag = -1.5;
-    mandelbrot->max.real = 2.0;
-    mandelbrot->max.imag = 1.5;
-}
-
 void	zoom(t_fractal *mandelbrot, double factor)
 {
     double width = mandelbrot->max.real - mandelbrot->min.real;

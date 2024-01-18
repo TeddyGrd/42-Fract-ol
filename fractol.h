@@ -51,6 +51,7 @@ typedef struct s_pixel
 {
     int     x;
     int     y;
+    int		color;
 }	t_pixel;
 
 typedef struct s_complex {
@@ -71,13 +72,13 @@ typedef struct	s_fractal
 	double		c_im;
 }				t_fractal;
 
-void draw_mandelbrot(void *mlx_ptr, void *win_ptr, t_fractal *mandelbrot);
-
-
 typedef struct s_color {
     int red;
     int blue;
     int green;
 } t_color;
+
+void draw_mandelbrot(char *image, t_fractal *fractal);
+
 
 #endif
