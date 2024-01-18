@@ -70,6 +70,7 @@ typedef struct	s_fractal
 	int			max_iter;
 	double		c_re;
 	double		c_im;
+	t_complex	constant;
 }				t_fractal;
 
 typedef struct s_color {

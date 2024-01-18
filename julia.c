@@ -12,83 +12,86 @@
 
 #include "fractol.h"
 
-typedef struct	s_mlx
-{
-	void		*mlx_ptr;
-	void		*win_ptr;
-}				t_mlx;
+void put_pixel_image(t_pixel pixel, char *str, int len) {
+    unsigned char r, g, b;
 
-int		julia_iterations(double x, double y, t_fractal *fractal)
-{
-	double	real = x;
-	double	imag = y;
-	double	temp;
-	int		iterations = 0;
+    r = (pixel.color >> 16) & 0xff;
+    g = (pixel.color >> 8) & 0xff;
+    b = pixel.color & 0xff;
 
-	while (iterations < fractal->max_iter)
-	{
-		temp = real * real - imag * imag + fractal->c_re;
-		imag = 2 * real * imag + fractal->c_im;
-		real = temp;
-		if (real * real + imag * imag > 4)
-			break ;
-		iterations++;
-	}
-	return (iterations);
+    str[(pixel.x * 4) + (len * 4 * pixel.y)] = b;
+    str[(pixel.x * 4) + (len * 4 * pixel.y) + 1] = g;
+    str[(pixel.x * 4) + (len * 4 * pixel.y) + 2] = r;
+    str[(pixel.x * 4) + (len * 4 * pixel.y) + 3] = 0;
 }
 
-int		color(int iterations, int max_iter)
-{
-	if (iterations == max_iter)
-		return (0xFFFFFF); // couleur du fond
-	return (iterations * 255 / max_iter); // exemple de couleur basée sur le nombre d'itérations
+void set_color(t_color *color, int red, int green, int blue) {
+    color->red = red;
+    color->green = green;
+    color->blue = blue;
 }
 
-void	draw_fractal(t_mlx *mlx, t_fractal *fractal)
-{
-	int		x;
-	int		y;
-	int		iterations;
-	int		color_val;
+void draw_julia(char *image, t_fractal *julia) {
+    int x = 0, y = 0;
+    t_complex z, tmp;
+    int iterations;
+    t_color color;
+    t_pixel pixel;
 
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			iterations = julia_iterations(
-				fractal->min_x + (x / (double)WIDTH) * (fractal->max_x - fractal->min_x),
-				fractal->min_y + (y / (double)HEIGHT) * (fractal->max_y - fractal->min_y),
-				fractal
-			);
-			color_val = color(iterations, fractal->max_iter);
-			mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, x, y, color_val);
-			x++;
-		}
-		y++;
-	}
+    while (y < HEIGHT) {
+        x = 0;
+        while (x < WIDTH) {
+            z.real = (x - WIDTH / 2.0) * 4.0 / WIDTH;
+            z.imag = (y - HEIGHT / 2.0) * 4.0 / HEIGHT;
+
+            iterations = 0;
+
+            while (iterations < 1000) {
+                tmp.real = z.real * z.real - z.imag * z.imag + julia->constant.real;
+                tmp.imag = 2 * z.real * z.imag + julia->constant.imag;
+                z = tmp;
+                iterations++;
+
+                if (z.real * z.real + z.imag * z.imag > 4.0) {
+                    break;
+                }
+            }
+
+            set_color(&color, (iterations) % 256, (iterations * 2) % 256, (iterations * 4) % 256);
+
+            pixel.x = x;
+            pixel.y = y;
+            pixel.color = (color.red << 16) | (color.green << 8) | color.blue;
+
+            put_pixel_image(pixel, image, WIDTH);
+
+            x++;
+        }
+        y++;
+    }
 }
 
-int		main(void)
-{
-	t_mlx		mlx;
-	t_fractal	fractal;
+int main() {
+	int bits_per_pixel;
+	int size_line;
+	int endian;
+    void *mlx_ptr = mlx_init();
+    void *win1 = mlx_new_window(mlx_ptr, WIDTH, HEIGHT, "Julia Set");
 
-	fractal.min_x = -2.0;
-	fractal.max_x = 2.0;
-	fractal.min_y = -2.0;
-	fractal.max_y = 2.0;
-	fractal.max_iter = 1000;
-	fractal.c_re = -0.7; // modifier ces valeurs pour changer la fractale de Julia
-	fractal.c_im = 0.27015;
+    char *image1 = mlx_new_image(mlx_ptr, WIDTH, HEIGHT);
+    char *image_data1 = mlx_get_data_addr(image1, &bits_per_pixel, &size_line, &endian);
 
-	mlx.mlx_ptr = mlx_init();
-	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, WIDTH, HEIGHT, "Fractal Julia");
+    t_fractal julia;
+    julia.constant.real = -0.8;
+    julia.constant.imag = 0.156;
 
-	draw_fractal(&mlx, &fractal);
+	draw_julia(image_data1, &julia);
+	mlx_put_image_to_window(mlx_ptr, win1, image1, 0, 0);
+	mlx_do_sync(mlx_ptr);
 
-	mlx_loop(mlx.mlx_ptr);
+    mlx_loop(mlx_ptr);
 
-	return (0);
+    mlx_destroy_image(mlx_ptr, image1);
+
+    return (0);
 }
