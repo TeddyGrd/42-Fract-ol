@@ -10,22 +10,22 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fractol.a
+NAME = fractol
 
 CFLAGS = -Wall -Werror -Wextra
 
-DEPS = libft.h\
-		ft_printf.h \
-		fractol.h
+SRC = fractol.c \
 
-SRC = fractol.c
+MLX_PATH = /home/tguerran/Bureau/fract-ol/minilibx-linux
+MLX_LIB = -L$(MLX_PATH) -lmlx -lX11 -lXext -lm
+MLX_INC = -I$(MLX_PATH)
 
 OFILES = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OFILES)
-	ar rcs $(NAME) $(OFILES)
+	cc $(CFLAGS) -o $(NAME) $(OFILES) $(MLX_LIB)
 
 clean:
 	rm -f $(OFILES)
