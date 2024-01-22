@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:30:53 by tguerran          #+#    #+#             */
-/*   Updated: 2024/01/09 16:01:46 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/01/22 21:57:25 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@
 // void	put_pixel_image(t_pixel pixel, char *str, int color);
 // int	mandelbrot(double real, double imag);
 // int	main_mandelbrot(void);
-
-
 
 typedef struct  s_img
 {
@@ -79,7 +77,11 @@ typedef struct s_color {
     int green;
 } t_color;
 
-void draw_mandelbrot(char *image, t_fractal *fractal);
+void	draw_mandelbrot(char *image, t_fractal *fractal);
+int		mouse_close(int mousecode, t_data *data);
+int		mouse_zoom(int mousecode, t_data *data);
+int		handle_key_press(int keycode, t_fractal *mandelbrot);
+
 
 
 #endif
