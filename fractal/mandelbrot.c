@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:04:34 by tguerran          #+#    #+#             */
-/*   Updated: 2024/01/10 15:06:59 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:41:53 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,23 +84,23 @@ void    draw_mandelbrot(char *image, t_fractal *mandelbrot) {
     }
 }
 
-int main() {
-	int bits_per_pixel;
-    int size_line;
-    int endian;
-    void *mlx_ptr = mlx_init();
-    void *win_ptr = mlx_new_window(mlx_ptr, WIDTH, HEIGHT, "Mandelbrot Set");
+// int main() {
+// 	int bits_per_pixel;
+//     int size_line;
+//     int endian;
+//     void *mlx_ptr = mlx_init();
+//     void *win_ptr = mlx_new_window(mlx_ptr, WIDTH, HEIGHT, "Mandelbrot Set");
 
-    char *image = mlx_new_image(mlx_ptr, WIDTH, HEIGHT);
-    char *image_data = mlx_get_data_addr(image, &bits_per_pixel, &size_line, &endian);
+//     char *image = mlx_new_image(mlx_ptr, WIDTH, HEIGHT);
+//     char *image_data = mlx_get_data_addr(image, &bits_per_pixel, &size_line, &endian);
 
-    t_fractal mandelbrot;
-    initialize_mandelbrot(&mandelbrot);
+//     t_fractal mandelbrot;
+//     initialize_mandelbrot(&mandelbrot);
 
-    draw_mandelbrot(image_data, &mandelbrot);
+//     draw_mandelbrot(image_data, &mandelbrot);
 
-    mlx_put_image_to_window(mlx_ptr, win_ptr, image, 0, 0);
-    mlx_loop(mlx_ptr);
-	mlx_destroy_image(mlx_ptr, image);
-    return 0;
-}
+//     mlx_put_image_to_window(mlx_ptr, win_ptr, image, 0, 0);
+//     mlx_loop(mlx_ptr);
+// 	mlx_destroy_image(mlx_ptr, image);
+//     return 0;
+// }

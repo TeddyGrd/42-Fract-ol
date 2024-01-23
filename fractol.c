@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:30:37 by tguerran          #+#    #+#             */
-/*   Updated: 2024/01/22 22:03:55 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:43:20 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,24 @@ int	main(int argc, char* argv[])
 	data.width = WIDTH;
     data.mlx = mlx_init();
     data.win = mlx_new_window(data.mlx, HEIGHT, WIDTH, "Hello World");
-	data.img = mlx_new_image(data.mlx, HEIGHT, WIDTH);
-	img.img_str = mlx_get_data_addr(data.img, &img.bits, &img.size_line, &img.endian);
+	img.img = mlx_new_image(data.mlx, HEIGHT, WIDTH);
+	img.img_str = mlx_get_data_addr(img.img, &img.bits, &img.size_line, &img.endian);
 	
 	// initialise la fractal ici
-	t_fractal julia;
-	initialize_julia(&julia);
-	draw_julia(data.img, &julia);
-
-	mlx_put_image_to_window(data.mlx,data.win,data.img, 0, 0);
-	mlx_get_data_addr(img.img,&img.bits ,&img.size_line, &img.endian);
+	t_fractal mandelbrot;
+	initialize_mandelbrot(&mandelbrot);
+	draw_mandelbrot(img.img_str, &mandelbrot);
+	// fin de l init
+	
 	mlx_put_image_to_window(data.mlx, data.win,img.img, 0, 0);
+	mlx_get_data_addr(img.img,&img.bits ,&img.size_line, &img.endian);
 
 	// mlx_mouse_hook(data.win,mouse_zoom, &data);
 	// mlx_hook(data.win, 33, 0, mouse_close, &data);
     mlx_do_sync(data.mlx);
 	mlx_loop(data.mlx);
-	mlx_destroy_image(data.mlx, data.img);
-    // sleep(5);
+	mlx_destroy_image(data.mlx, img.img);
+    sleep(5);
     return (0);
 }
 
