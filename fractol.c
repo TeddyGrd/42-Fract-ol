@@ -16,32 +16,48 @@ int	main(int argc, char* argv[])
 {
 	t_data data;
 	t_img img;
-	t_fractal mandelbrot;
 	data.height = HEIGHT;
 	data.width = WIDTH;
     data.mlx = mlx_init();
     data.win = mlx_new_window(data.mlx, HEIGHT, WIDTH, "Hello World");
-	initialize_mandelbrot(&mandelbrot);
+	data.img = mlx_new_image(data.mlx, HEIGHT, WIDTH);
+	img.img_str = mlx_get_data_addr(data.img, &img.bits, &img.size_line, &img.endian);
+	
+	// initialise la fractal ici
+	t_fractal julia;
+	initialize_julia(&julia);
+	draw_julia(data.img, &julia);
 
-	// draw_mandelbrot(data.mlx,data.win, &mandelbrot);
-
-	img.img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
-	img.img_str = mlx_get_data_addr(img.img,img.bits ,img.size_line, img.endian);
+	mlx_put_image_to_window(data.mlx,data.win,data.img, 0, 0);
+	mlx_get_data_addr(img.img,&img.bits ,&img.size_line, &img.endian);
 	mlx_put_image_to_window(data.mlx, data.win,img.img, 0, 0);
-	// data.img = mlx_xpm_file_to_image(data.mlx, relative_path, &data.width, &data.height );
-	// printf("%s \n", data.img);
-	// if(!data.img)
-	// {
-	// 	printf("erreur chargement image \n");
-	// 	return (1);
-	// }
-	// img.img_str = mlx_get_data_addr(img.img, &img.bits, &img.size_line,&img.endian);
-	mlx_mouse_hook(data.win,mouse_zoom, &data);
-	mlx_hook(data.win, 33, 0, mouse_close, &data);
-	// display_color(&img, &data);
-	// display_image(&data);
+
+	// mlx_mouse_hook(data.win,mouse_zoom, &data);
+	// mlx_hook(data.win, 33, 0, mouse_close, &data);
     mlx_do_sync(data.mlx);
 	mlx_loop(data.mlx);
+	mlx_destroy_image(data.mlx, data.img);
     // sleep(5);
     return (0);
 }
+
+// int main() {
+//     t_img img;
+//     void *mlx_ptr = mlx_init();
+//     void *win1 = mlx_new_window(mlx_ptr, WIDTH, HEIGHT, "Julia Set");
+
+//     char *image1 = mlx_new_image(mlx_ptr, WIDTH, HEIGHT);
+//     char *image_data1 = mlx_get_data_addr(image1, &img.bits , &img.size_line, &img.endian);
+//     t_fractal julia;
+
+//     initialize_julia(&julia);
+
+// 	draw_julia(image_data1, &julia);
+// 	mlx_put_image_to_window(mlx_ptr, win1, image1, 0, 0);
+// 	mlx_do_sync(mlx_ptr);
+
+//     mlx_loop(mlx_ptr);
+
+
+//     return (0);
+// }

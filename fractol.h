@@ -21,11 +21,6 @@
 #define WIDTH 800
 #define HEIGHT 800
 
-// int	main(void);
-// void	put_pixel_image(t_pixel pixel, char *str, int color);
-// int	mandelbrot(double real, double imag);
-// int	main_mandelbrot(void);
-
 typedef struct  s_img
 {
     void    *img;
@@ -77,7 +72,10 @@ typedef struct s_color {
     int green;
 } t_color;
 
-void	draw_mandelbrot(char *image, t_fractal *fractal);
+void    initialize_mandelbrot(t_fractal *mandelbrot);
+void	draw_mandelbrot(char *image, t_fractal *mandelbrot);
+void	initialize_julia(t_fractal *julia);
+void    draw_julia(char *image, t_fractal *julia);
 int		mouse_close(int mousecode, t_data *data);
 int		mouse_zoom(int mousecode, t_data *data);
 int		handle_key_press(int keycode, t_fractal *mandelbrot);

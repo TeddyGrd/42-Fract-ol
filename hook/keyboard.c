@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../fractol.h"
 
 
 int handle_key_press(int keycode, t_fractal *mandelbrot) {

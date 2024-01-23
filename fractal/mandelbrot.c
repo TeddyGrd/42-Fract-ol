@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../fractol.h"
 
 void put_pixel_image(t_pixel pixel, char *str, int len) {
     unsigned char r, g, b;
@@ -26,9 +26,7 @@ void put_pixel_image(t_pixel pixel, char *str, int len) {
 }
 
 void set_color(t_color *color, int iterations) {
-    // Utiliser des fonctions trigonométriques pour des variations psychédéliques à l'intérieur de Mandelbrot
     if (iterations == 1000) {
-        // La limite n'a pas été atteinte, attribuer une couleur spécifique (ici, noir)
         color->red = 0;
         color->green = 0;
         color->blue = 0;
@@ -39,7 +37,7 @@ void set_color(t_color *color, int iterations) {
     }
 }
 
-void	initialize_mandelbrot(t_fractal *mandelbrot)
+void    initialize_mandelbrot(t_fractal *mandelbrot)
 {
     mandelbrot->min.real = -2.0;
     mandelbrot->min.imag = -2;
@@ -48,7 +46,7 @@ void	initialize_mandelbrot(t_fractal *mandelbrot)
 }
 
 
-void draw_mandelbrot(char *image, t_fractal *fractal) {
+void    draw_mandelbrot(char *image, t_fractal *mandelbrot) {
     int x = 0, y = 0;
     t_complex c, z, tmp;
     int iterations;
@@ -58,8 +56,8 @@ void draw_mandelbrot(char *image, t_fractal *fractal) {
     while (y < HEIGHT) {
         x = 0;
         while (x < WIDTH) {
-            c.real = fractal->min.real + (x / (double)WIDTH) * (fractal->max.real - fractal->min.real);
-            c.imag = fractal->min.imag + (y / (double)HEIGHT) * (fractal->max.imag - fractal->min.imag);
+            c.real = mandelbrot->min.real + (x / (double)WIDTH) * (mandelbrot->max.real - mandelbrot->min.real);
+            c.imag = mandelbrot->min.imag + (y / (double)HEIGHT) * (mandelbrot->max.imag - mandelbrot->min.imag);
 
             z.real = 0.0;
             z.imag = 0.0;
@@ -88,8 +86,8 @@ void draw_mandelbrot(char *image, t_fractal *fractal) {
 
 int main() {
 	int bits_per_pixel;
-int size_line;
-int endian;
+    int size_line;
+    int endian;
     void *mlx_ptr = mlx_init();
     void *win_ptr = mlx_new_window(mlx_ptr, WIDTH, HEIGHT, "Mandelbrot Set");
 
