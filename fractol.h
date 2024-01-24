@@ -72,13 +72,19 @@ typedef struct s_color {
     int green;
 } t_color;
 
+void    screen_init(t_data *data);
+void    put_pixel_image(t_pixel pixel, char *str, int len);
 void    initialize_mandelbrot(t_fractal *mandelbrot);
+void    set_color_mandelbrot(t_color *color, int iterations);
 void	draw_mandelbrot(char *image, t_fractal *mandelbrot);
-void	initialize_julia(t_fractal *julia);
+void	initialize_julia(t_fractal *julia,double param1,double param2);
+void	set_color_julia(t_color *color, int iterations);
 void    draw_julia(char *image, t_fractal *julia);
 int		mouse_close(int mousecode, t_data *data);
 int		mouse_zoom(int mousecode, t_data *data);
 int		handle_key_press(int keycode, t_fractal *mandelbrot);
+
+// size_t	ft_putnbr(int nb);
 
 
 

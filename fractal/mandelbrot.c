@@ -12,30 +12,6 @@
 
 #include "../fractol.h"
 
-void put_pixel_image(t_pixel pixel, char *str, int len) {
-    unsigned char r, g, b;
-
-    r = (pixel.color >> 16) & 0xff;
-    g = (pixel.color >> 8) & 0xff;
-    b = pixel.color & 0xff;
-
-    str[(pixel.x * 4) + (len * 4 * pixel.y)] = b;
-    str[(pixel.x * 4) + (len * 4 * pixel.y) + 1] = g;
-    str[(pixel.x * 4) + (len * 4 * pixel.y) + 2] = r;
-    str[(pixel.x * 4) + (len * 4 * pixel.y) + 3] = 0;
-}
-
-void set_color(t_color *color, int iterations) {
-    if (iterations == 1000) {
-        color->red = 0;
-        color->green = 0;
-        color->blue = 0;
-    } else {
-        color->red = (sin(0.05 * iterations) + 1.0) * 128;
-        color->green = (sin(0.1 * iterations) + 1.0) * 128;
-        color->blue = (sin(0.15 * iterations) + 1.0) * 128;
-    }
-}
 
 void    initialize_mandelbrot(t_fractal *mandelbrot)
 {
@@ -44,7 +20,6 @@ void    initialize_mandelbrot(t_fractal *mandelbrot)
     mandelbrot->max.real = 2.0;
     mandelbrot->max.imag = 2;
 }
-
 
 void    draw_mandelbrot(char *image, t_fractal *mandelbrot) {
     int x = 0, y = 0;
@@ -71,7 +46,7 @@ void    draw_mandelbrot(char *image, t_fractal *mandelbrot) {
                 iterations++;
             }
 
-            set_color(&color,iterations);
+            set_color_mandelbrot(&color,iterations);
 
             pixel.x = x;
             pixel.y = y;
@@ -83,24 +58,3 @@ void    draw_mandelbrot(char *image, t_fractal *mandelbrot) {
         y++;
     }
 }
-
-// int main() {
-// 	int bits_per_pixel;
-//     int size_line;
-//     int endian;
-//     void *mlx_ptr = mlx_init();
-//     void *win_ptr = mlx_new_window(mlx_ptr, WIDTH, HEIGHT, "Mandelbrot Set");
-
-//     char *image = mlx_new_image(mlx_ptr, WIDTH, HEIGHT);
-//     char *image_data = mlx_get_data_addr(image, &bits_per_pixel, &size_line, &endian);
-
-//     t_fractal mandelbrot;
-//     initialize_mandelbrot(&mandelbrot);
-
-//     draw_mandelbrot(image_data, &mandelbrot);
-
-//     mlx_put_image_to_window(mlx_ptr, win_ptr, image, 0, 0);
-//     mlx_loop(mlx_ptr);
-// 	mlx_destroy_image(mlx_ptr, image);
-//     return 0;
-// }

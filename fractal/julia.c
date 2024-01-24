@@ -12,40 +12,20 @@
 
 #include "../fractol.h"
 
-void put_pixel_image(t_pixel pixel, char *str, int len) {
-    unsigned char r, g, b;
-
-    r = (pixel.color >> 16) & 0xff;
-    g = (pixel.color >> 8) & 0xff;
-    b = pixel.color & 0xff;
-
-    str[(pixel.x * 4) + (len * 4 * pixel.y)] = b;
-    str[(pixel.x * 4) + (len * 4 * pixel.y) + 1] = g;
-    str[(pixel.x * 4) + (len * 4 * pixel.y) + 2] = r;
-    str[(pixel.x * 4) + (len * 4 * pixel.y) + 3] = 0;
-}
-
-void set_color(t_color *color, int iterations) {
-    if (iterations == 1000) {
-        color->red = 0;
-        color->green = 0;
-        color->blue = 0;
-    } else {
-		double factor = 0.1;
-		color->red = (sin(factor * iterations) + 1.0) * 128;
-        color->green = (sin(factor * iterations + 2.0) + 1.0) * 128;
-        color->blue = (sin(factor * iterations + 4.0) + 1.0) * 128;
-
-        color->red += (sin(0.1 * iterations) + 1.0) * 128;
-        color->green += (sin(0.2 * iterations) + 1.0) * 128;
-        color->blue += (sin(0.3 * iterations) + 1.0) * 128;
-    }
-}
-
-void	initialize_julia(t_fractal *julia)
+void	initialize_julia(t_fractal *julia,double param1,double param2)
 {
-    julia->constant.real = -0.8;
-    julia->constant.imag = 0.156;
+    if(param1 && param2)
+    {
+        julia->constant.real = param1;
+        julia->constant.imag = param2;
+    }
+    else
+    {
+        param1 = -0.8;
+        param2 = 0.156;
+        julia->constant.real = param1;
+        julia->constant.imag = param2;
+    }
 }
 
 void draw_julia(char *image, t_fractal *julia) {
@@ -74,7 +54,7 @@ void draw_julia(char *image, t_fractal *julia) {
                 }
             }
 
-			set_color(&color, iterations);
+			set_color_julia(&color, iterations);
 
             pixel.x = x;
             pixel.y = y;
@@ -87,25 +67,3 @@ void draw_julia(char *image, t_fractal *julia) {
         y++;
     }
 }
-
-// int main() {
-//     t_img img;
-//     void *mlx_ptr = mlx_init();
-//     void *win1 = mlx_new_window(mlx_ptr, WIDTH, HEIGHT, "Julia Set");
-
-//     char *image1 = mlx_new_image(mlx_ptr, WIDTH, HEIGHT);
-//     char *image_data1 = mlx_get_data_addr(image1, &img.bits , &img.size_line, &img.endian);
-//     t_fractal julia;
-
-//     initialize_julia(&julia);
-
-// 	draw_julia(image_data1, &julia);
-// 	mlx_put_image_to_window(mlx_ptr, win1, image1, 0, 0);
-// 	mlx_do_sync(mlx_ptr);
-
-//     mlx_loop(mlx_ptr);
-
-//     mlx_destroy_image(mlx_ptr, image1);
-
-//     return (0);
-// }
