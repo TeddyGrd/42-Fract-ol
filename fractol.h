@@ -83,8 +83,9 @@ void    draw_julia(char *image, t_fractal *julia);
 int		mouse_close(int mousecode, t_data *data);
 int		mouse_zoom(int mousecode, t_data *data);
 int		handle_key_press(int keycode, t_fractal *mandelbrot);
+void    error_list(char *str);
 
-// size_t	ft_putnbr(int nb);
+int	ft_strcmp(const char *s1, const char *s2);
 
 
 
