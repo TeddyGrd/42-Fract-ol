@@ -36,7 +36,8 @@ int fractal(int argc, char* argv[], t_img img)
 				draw_julia(img.img_str, &julia);
 			}
 			else 
-				error_list(argv[1]);
+				if(i == 1)
+					error_list(argv[1]);
 			i++;
 		}
 	}
@@ -49,7 +50,7 @@ int	main(int argc, char* argv[])
 	t_img img;
 	data.height = HEIGHT;
 	data.width = WIDTH;
-	if(argc >= 1)
+	if(argc > 1)
 	{
     	data.mlx = mlx_init();
     	data.win = mlx_new_window(data.mlx, HEIGHT, WIDTH, "Hello World");
@@ -57,12 +58,6 @@ int	main(int argc, char* argv[])
 		img.img_str = mlx_get_data_addr(img.img, &img.bits, &img.size_line, &img.endian);
 	
 		fractal(argc, argv, img);
-    	// double r_min = 1;
-    	// double r_max = 4;
-    	// double a = 10.0 / log(5.0);
-    	// int max_iterations = 10000;
-
-    	// draw_lyapunov(img.img_str, r_min, r_max, a, max_iterations);
 
 		mlx_put_image_to_window(data.mlx, data.win,img.img, 0, 0);
 		mlx_get_data_addr(img.img,&img.bits ,&img.size_line, &img.endian);
@@ -73,5 +68,9 @@ int	main(int argc, char* argv[])
 		mlx_loop(data.mlx);
 		mlx_destroy_image(data.mlx, img.img);
     	return (0);
+	}
+	else{
+		error_command();
+		return (0);
 	}
 }

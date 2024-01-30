@@ -84,6 +84,7 @@ int		mouse_close(int mousecode, t_data *data);
 int		mouse_zoom(int mousecode, t_data *data);
 int		handle_key_press(int keycode, t_fractal *mandelbrot);
 void    error_list(char *str);
+void    error_command();
 
 int	ft_strcmp(const char *s1, const char *s2);
 
