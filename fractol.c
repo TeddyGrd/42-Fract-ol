@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:30:37 by tguerran          #+#    #+#             */
-/*   Updated: 2024/01/23 22:01:48 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:55:24 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int fractal(int argc, char* argv[], t_img img)
 			{
 				t_fractal julia;
 				if(argv[2] && argv[3])
-					initialize_julia(&julia,atof(argv[2]),atof(argv[3]));
+					initialize_julia(&julia,ft_atof(argv[2]),ft_atof(argv[3]));
 				else
 					initialize_julia(&julia, -0.8, 0.156);
 				draw_julia(img.img_str, &julia);

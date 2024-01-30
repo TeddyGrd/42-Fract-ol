@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:30:53 by tguerran          #+#    #+#             */
-/*   Updated: 2024/01/22 21:57:25 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:55:13 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void    draw_julia(char *image, t_fractal *julia);
 int		mouse_close(int mousecode, t_data *data);
 int		mouse_zoom(int mousecode, t_data *data);
 int		handle_key_press(int keycode, t_fractal *mandelbrot);
+double  ft_atof(const char *nptr);
 void    error_list(char *str);
 void    error_command();
 

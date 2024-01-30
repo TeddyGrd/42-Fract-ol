@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 14:38:18 by tguerran          #+#    #+#             */
-/*   Updated: 2024/01/25 15:52:48 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:55:02 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,24 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return (*(unsigned char *)s1 - *(unsigned char *)s2);
 }
 
-// double ft_atof(const char *nptr)
-// {
-    
-// }
+double ft_atof(const char *nptr) {
+    double val = 0.0;
+    int sign = 1;
+
+    while (*nptr == ' ') nptr++;
+
+    if (*nptr == '-') sign = -1, nptr++;
+
+    while (*nptr >= '0' && *nptr <= '9') val = val * 10.0 + (*nptr++ - '0');
+
+    if (*nptr == '.') {
+        double fraction = 0.1;
+        nptr++;
+        while (*nptr >= '0' && *nptr <= '9') {
+            val += (*nptr++ - '0') * fraction;
+            fraction *= 0.1;
+        }
+    }
+
+    return sign * val;
+}
