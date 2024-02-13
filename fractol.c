@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:30:37 by tguerran          #+#    #+#             */
-/*   Updated: 2024/01/30 13:55:24 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/02/13 18:37:52 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ int fractal(int argc, char* argv[], t_img img)
 			if (ft_strcmp(argv[1],"mandelbrot") == 0)
 			{
 				t_fractal mandelbrot;
+				mandelbrot.zoom = 0;
 				initialize_mandelbrot(&mandelbrot);
 				draw_mandelbrot(img.img_str, &mandelbrot);
 			}
 			else if(ft_strcmp(argv[1],"julia") == 0)
 			{
 				t_fractal julia;
+				julia.zoom = 0;
 				if(argv[2] && argv[3])
 					initialize_julia(&julia,ft_atof(argv[2]),ft_atof(argv[3]));
 				else

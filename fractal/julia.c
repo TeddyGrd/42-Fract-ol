@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:03:53 by tguerran          #+#    #+#             */
-/*   Updated: 2024/01/09 15:43:15 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/02/13 18:41:00 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ void draw_julia(char *image, t_fractal *julia) {
     int iterations;
     t_color color;
     t_pixel pixel;
+    t_fractal fractal;
 
     while (y < HEIGHT) {
         x = 0;
         while (x < WIDTH) {
-            z.real = (x - WIDTH / 2) * (3.0 + julia.zoom) / WIDTH;
-            z.imag = (y - HEIGHT / 2) * (3.0 + julia.zoom) / HEIGHT;
+            z.real = (x - WIDTH / 2) * (3.0 + fractal.zoom) / WIDTH;
+            z.imag = (y - HEIGHT / 2) * (3.0 + fractal.zoom) / HEIGHT;
 
             iterations = 0;
 
