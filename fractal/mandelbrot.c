@@ -15,10 +15,10 @@
 
 void    initialize_mandelbrot(t_fractal *mandelbrot)
 {
-    mandelbrot->min.real = -2.0;
-    mandelbrot->min.imag = -2;
-    mandelbrot->max.real = 2.0;
-    mandelbrot->max.imag = 2;
+    mandelbrot->min.real = -2.0 - mandelbrot.zoom;
+    mandelbrot->min.imag = -2 - mandelbrot.zoom;
+    mandelbrot->max.real = 2.0 + mandelbrot.zoom;
+    mandelbrot->max.imag = 2 + mandelbrot.zoom;
 }
 
 void    draw_mandelbrot(char *image, t_fractal *mandelbrot) {

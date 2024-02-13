@@ -38,8 +38,8 @@ void draw_julia(char *image, t_fractal *julia) {
     while (y < HEIGHT) {
         x = 0;
         while (x < WIDTH) {
-            z.real = (x - WIDTH / 2) * 3.0 / WIDTH;
-            z.imag = (y - HEIGHT / 2) * 3.0 / HEIGHT;
+            z.real = (x - WIDTH / 2) * (3.0 + julia.zoom) / WIDTH;
+            z.imag = (y - HEIGHT / 2) * (3.0 + julia.zoom) / HEIGHT;
 
             iterations = 0;
 
