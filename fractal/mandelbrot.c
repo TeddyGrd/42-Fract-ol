@@ -6,27 +6,26 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:04:34 by tguerran          #+#    #+#             */
-/*   Updated: 2024/02/13 18:40:01 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:51:55 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
 
 
-void    initialize_mandelbrot(t_fractal *mandelbrot)
+void    initialize_mandelbrot(t_fractal *mandelbrot, t_data *data)
 {
-    t_fractal fractal;
-    mandelbrot->min.real = -2.0 - fractal.zoom;
-    mandelbrot->min.imag = -2 - fractal.zoom;
-    mandelbrot->max.real = 2.0 + fractal.zoom;
-    mandelbrot->max.imag = 2 + fractal.zoom;
+    mandelbrot->min.real = -1.0 - data->zoom;
+    mandelbrot->min.imag = -1.0 - data->zoom;
+    mandelbrot->max.real = 1.0 + data->zoom;
+    mandelbrot->max.imag = 1.0 + data->zoom;
+    printf(" %f 3\n", data->zoom);
 }
 
 void    draw_mandelbrot(char *image, t_fractal *mandelbrot) {
     int x = 0, y = 0;
     t_complex c, z, tmp;
     int iterations;
-    t_color color;
     t_pixel pixel;
 
     while (y < HEIGHT) {
@@ -47,11 +46,11 @@ void    draw_mandelbrot(char *image, t_fractal *mandelbrot) {
                 iterations++;
             }
 
-            set_color_mandelbrot(&color,iterations);
+            set_color_mandelbrot(&pixel,iterations);
 
             pixel.x = x;
             pixel.y = y;
-            pixel.color = (color.red << 16) | (color.green << 8) | color.blue;
+            pixel.color = (pixel.red << 16) | (pixel.green << 8) | pixel.blue;
 
             put_pixel_image(pixel, image, WIDTH);
             x++;

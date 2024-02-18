@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:32:26 by tguerran          #+#    #+#             */
-/*   Updated: 2024/02/15 00:12:44 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:43:06 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int checkerror(int argc, char *argv[])
 	return (1);
 }
 
-void error_command()
+void error_command(void)
 {
 	ft_printf("----RAPPEL DES COMMANDES---- \n");
 	ft_printf(" | | | | | | | | | | | | | | \n");
@@ -55,6 +55,7 @@ void error_command()
 
 void error_list(char *str)
 {
+	ft_printf(" | | | | | | | | | | | | | | \n");
 	ft_printf("---- %s N'EST PAS RECONNU ----\n", str);
 	ft_printf(" | | | | | | | | | | | | | | \n");
 	error_command();

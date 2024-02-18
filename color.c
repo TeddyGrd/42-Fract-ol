@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:30:21 by tguerran          #+#    #+#             */
-/*   Updated: 2024/01/27 10:23:24 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:38:25 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void put_pixel_image(t_pixel pixel, char *str, int len) {
     str[(pixel.x * 4) + (len * 4 * pixel.y) + 3] = 0;
 }
 
-void set_color_mandelbrot(t_color *color, int iterations) {
+void set_color_mandelbrot(t_pixel *color, int iterations) {
     if (iterations == 1000) {
         color->red = 0;
         color->green = 0;
@@ -38,7 +38,7 @@ void set_color_mandelbrot(t_color *color, int iterations) {
     }
 }
 
-void set_color_julia(t_color *color, int iterations) {
+void set_color_julia(t_pixel *color, int iterations) {
     if (iterations == 1000) {
         color->red = 0;
         color->green = 0;

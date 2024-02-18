@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:03:53 by tguerran          #+#    #+#             */
-/*   Updated: 2024/02/13 18:41:00 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:39:08 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,20 @@ void initialize_julia(t_fractal *julia, double param1, double param2)
 	}
 }
 
-void draw_julia(char *image, t_fractal *julia)
+void draw_julia(char *image, t_fractal *julia, t_data *data)
 {
 	int x = 0, y = 0;
 	t_complex z, tmp;
 	int iterations;
-	t_color color;
 	t_pixel pixel;
-	t_fractal fractalchaine;
 
 	while (y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			z.real = (x - WIDTH / 2) * (3.0 + fractalchaine.zoom) / WIDTH;
-			z.imag = (y - HEIGHT / 2) * (3.0 + fractalchaine.zoom) / HEIGHT;
+			z.real = (x - WIDTH / 2) * (2.0 + data->zoom) / WIDTH;
+			z.imag = (y - HEIGHT / 2) * (2.0 + data->zoom) / HEIGHT;
 
 			iterations = 0;
 
@@ -55,16 +53,14 @@ void draw_julia(char *image, t_fractal *julia)
 				iterations++;
 
 				if (z.real * z.real + z.imag * z.imag > 4.0)
-				{
 					break;
-				}
 			}
 
-			set_color_julia(&color, iterations);
+			set_color_julia(&pixel, iterations);
 
 			pixel.x = x;
 			pixel.y = y;
-			pixel.color = (color.red << 16) | (color.green << 8) | color.blue;
+			pixel.color = (pixel.red << 16) | (pixel.green << 8) | pixel.blue;
 
 			put_pixel_image(pixel, image, WIDTH);
 
