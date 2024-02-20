@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:03:53 by tguerran          #+#    #+#             */
-/*   Updated: 2024/02/20 02:02:52 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:08:55 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void initialize_julia(t_fractal *julia, double param1, double param2)
 	}
 }
 
-void draw_julia(char *image, t_fractal *julia, t_data *data,t_fractal *fractalchaine)
+void draw_julia(char *image, t_fractal *julia, t_data *data)
 {
 	int x = 0, y = 0;
 	t_complex z, tmp;
@@ -40,8 +40,8 @@ void draw_julia(char *image, t_fractal *julia, t_data *data,t_fractal *fractalch
 		x = 0;
 		while (x < WIDTH)
 		{
-			z.real = (x - WIDTH / 2) * (2.0 + fractalchaine->zoom) / WIDTH;
-			z.imag = (y - HEIGHT / 2) * (2.0 + fractalchaine->zoom) / HEIGHT;
+			z.real = (x - WIDTH / 2) * (2.0 / data->zoom) / WIDTH;
+			z.imag = (y - HEIGHT / 2) * (2.0 / data->zoom) / HEIGHT;
 
 			iterations = 0;
 
