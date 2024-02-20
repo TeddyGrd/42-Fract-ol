@@ -6,20 +6,20 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:04:34 by tguerran          #+#    #+#             */
-/*   Updated: 2024/02/15 15:51:55 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/02/20 01:54:26 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
 
 
-void    initialize_mandelbrot(t_fractal *mandelbrot, t_data *data)
+void    initialize_mandelbrot(t_fractal *mandelbrot, t_data *data,t_fractal *fractalchaine)
 {
-    mandelbrot->min.real = -1.0 - data->zoom;
-    mandelbrot->min.imag = -1.0 - data->zoom;
-    mandelbrot->max.real = 1.0 + data->zoom;
-    mandelbrot->max.imag = 1.0 + data->zoom;
-    printf(" %f 3\n", data->zoom);
+    mandelbrot->min.real = -1.0 - fractalchaine->zoom;
+    mandelbrot->min.imag = -1.0 - fractalchaine->zoom;
+    mandelbrot->max.real = 1.0 + fractalchaine->zoom;
+    mandelbrot->max.imag = 1.0 + fractalchaine->zoom;
+    printf(" %f 3\n", fractalchaine->zoom);
 }
 
 void    draw_mandelbrot(char *image, t_fractal *mandelbrot) {
