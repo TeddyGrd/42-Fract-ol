@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:30:37 by tguerran          #+#    #+#             */
-/*   Updated: 2024/02/20 16:13:58 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/02/21 21:40:28 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int fractal(int argc, char *argv[], t_data *data)
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	mlx_get_data_addr(data->img, &data->bits, &data->size_line, &data->endian);
 	mlx_mouse_hook(data->win, mouse_zoom, data);
-	mlx_hook(data->win, 33, 0, mouse_close, data);
+	mlx_hook(data->win, 17, 0, mouse_close, data);
 	mlx_key_hook(data->win, handle_key_press, NULL);
 	mlx_do_sync(data->mlx);
 	mlx_loop(data->mlx);
@@ -46,7 +46,12 @@ void drawfractal(int argc, char *argv[], t_data *data)
 				data->param2 = ft_atof(argv[3]);
 			}
 			else
-				initialize_julia(&fractal, -0.8, 0.156);
+			{
+				data->param1 = -0.8;
+				data->param2 = 0.156;
+				initialize_julia(&fractal, data->param1, data->param2);
+			}
+
 			draw_julia(data->img_str, &fractal, data);
 		}
 }
@@ -54,7 +59,6 @@ void drawfractal(int argc, char *argv[], t_data *data)
 int main(int argc, char *argv[])
 {
 	t_data data;
-
 	data.zoom = 0.5;
 	if (checkerror(argc, argv) == 0)
 		return (0);

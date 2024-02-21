@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:30:53 by tguerran          #+#    #+#             */
-/*   Updated: 2024/02/20 16:29:45 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/02/21 19:45:44 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,17 @@ void    draw_mandelbrot(char *image, t_fractal *mandelbrot);
 void	initialize_julia(t_fractal *julia, double param1, double param2);
 void	set_color_julia(t_pixel *color, int iterations);
 void	draw_julia(char *image, t_fractal *julia, t_data *data);
-int		mouse_close(int mousecode, t_data *data);
+int		mouse_close(t_data *data);
 int		mouse_zoom(int mousecode,int x , int y, t_data *data);
-int		handle_key_press(int keycode);
+int		handle_key_press(int keycode, t_data *data);
 double	ft_atof(const char *nptr);
 void	error_list(char *str);
 int		checkerror(int argc, char *argv[]);
 int		ft_strcmp(const char *s1, const char *s2);
 void	error_command(void);
 void	drawfractal(int argc, char *argv[], t_data *data);
+int		ft_clean(t_data *data);
+
 
 
 #endif

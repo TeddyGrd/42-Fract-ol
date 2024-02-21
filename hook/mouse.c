@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 21:47:49 by tguerran          #+#    #+#             */
-/*   Updated: 2024/02/20 16:11:53 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/02/21 21:34:32 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,23 @@
 
 void drawfractal_zoom(t_data *data)
 {
-	t_fractal fractal;
+	t_fractal fractalchaine;
 
 	if(data->fractal == 0)
 	{
-		initialize_mandelbrot(&fractal, data);
-		draw_mandelbrot(data->img_str, &fractal);
+		initialize_mandelbrot(&fractalchaine, data);
+		draw_mandelbrot(data->img_str, &fractalchaine);
 	}
 	if(data->fractal == 1)
 	{
-		if(data->fractal)
-			initialize_julia(&fractal, data->param1, data->param2);
-		else
-			initialize_julia(&fractal, -0.8, 0.156);
-	draw_julia(data->img_str, &fractal, data);
+		initialize_julia(&fractalchaine, data->param1, data->param2);
+		draw_julia(data->img_str, &fractalchaine, data);
 	}
 }
 
-int	mouse_close(int mousecode, t_data *data)
+int	mouse_close(t_data *data)
 {
-	if(mousecode != 0)
-		exit (0);
+		ft_clean(data);
 }
 
 int	mouse_zoom(int mousecode,int x, int y, t_data *data)
