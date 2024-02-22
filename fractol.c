@@ -6,28 +6,27 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:30:37 by tguerran          #+#    #+#             */
-/*   Updated: 2024/02/21 21:40:28 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/02/22 19:04:17 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int fractal(int argc, char *argv[], t_data *data)
+void fractal(char *argv[], t_data *data)
 {
 	data->img = mlx_new_image(data->mlx, HEIGHT, WIDTH);
 	data->img_str = mlx_get_data_addr(data->img, &data->bits, &data->size_line, &data->endian);
-	drawfractal(argc,argv, data);
+	drawfractal(argv, data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	mlx_get_data_addr(data->img, &data->bits, &data->size_line, &data->endian);
 	mlx_mouse_hook(data->win, mouse_zoom, data);
 	mlx_hook(data->win, 17, 0, mouse_close, data);
-	mlx_key_hook(data->win, handle_key_press, NULL);
+	mlx_key_hook(data->win, handle_key_press, data);
 	mlx_do_sync(data->mlx);
 	mlx_loop(data->mlx);
-	return (0);
 }
 
-void drawfractal(int argc, char *argv[], t_data *data)
+void drawfractal(char *argv[], t_data *data)
 {
 	t_fractal fractal;
 	if (ft_strcmp(argv[1], "mandelbrot") == 0)
@@ -60,9 +59,19 @@ int main(int argc, char *argv[])
 {
 	t_data data;
 	data.zoom = 0.5;
+	data.param1 =0.0;
+	data.param2=0.0;
 	if (checkerror(argc, argv) == 0)
 		return (0);
 	data.mlx = mlx_init();
+	if(data.mlx == NULL)
+		return (0);
 	data.win = mlx_new_window(data.mlx, HEIGHT, WIDTH, "Fractal");
-	fractal(argc, argv ,&data);
+	if(data.win == NULL)
+	{
+		mlx_destroy_display(data.mlx);
+		free(data.mlx);
+		return (0);
+	}
+	fractal(argv ,&data);
 }

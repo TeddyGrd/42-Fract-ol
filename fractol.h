@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:30:53 by tguerran          #+#    #+#             */
-/*   Updated: 2024/02/21 19:45:44 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:52:08 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct s_fractal
 	t_complex constant;
 } t_fractal;
 
-void	screen_init(t_data *data);
 void	put_pixel_image(t_pixel pixel, char *str, int len);
 void    initialize_mandelbrot(t_fractal *mandelbrot, t_data *data);
 void	set_color_mandelbrot(t_pixel *color, int iterations);
@@ -77,8 +76,8 @@ void	error_list(char *str);
 int		checkerror(int argc, char *argv[]);
 int		ft_strcmp(const char *s1, const char *s2);
 void	error_command(void);
-void	drawfractal(int argc, char *argv[], t_data *data);
-int		ft_clean(t_data *data);
+void	drawfractal(char *argv[], t_data *data);
+void	ft_clean(t_data *data);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:04:34 by tguerran          #+#    #+#             */
-/*   Updated: 2024/02/20 16:12:40 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:59:37 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void    initialize_mandelbrot(t_fractal *mandelbrot, t_data *data)
     mandelbrot->min.imag = -1.0 / data->zoom;
     mandelbrot->max.real = 1.0 / data->zoom;
     mandelbrot->max.imag = 1.0 / data->zoom;
-    printf(" %f 3\n", data->zoom);
 }
 
 void    draw_mandelbrot(char *image, t_fractal *mandelbrot) {

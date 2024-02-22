@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 14:38:18 by tguerran          #+#    #+#             */
-/*   Updated: 2024/02/21 21:40:37 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:15:30 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,11 @@ double ft_atof(const char *nptr)
 }
 
 
-int ft_clean(t_data *data)
+void ft_clean(t_data *data)
 {
 	mlx_destroy_image(data->mlx, data->img);
     mlx_destroy_window(data->mlx, data->win);
+    mlx_destroy_display(data->mlx);
+    free(data->mlx);
     exit(0);
 }
