@@ -6,14 +6,16 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:03:53 by tguerran          #+#    #+#             */
-/*   Updated: 2024/02/20 16:08:55 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:02:47 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
 
-void initialize_julia(t_fractal *julia, double param1, double param2)
+void	initialize_julia(t_fractal *julia, double param1, double param2)
 {
+	julia->x = 0;
+	julia->y = 0;
 	if (param1 && param2)
 	{
 		julia->constant.real = param1;
@@ -28,44 +30,43 @@ void initialize_julia(t_fractal *julia, double param1, double param2)
 	}
 }
 
-void draw_julia(char *image, t_fractal *julia, t_data *data)
+void	calculate_julia(t_fractal *julia, t_data *data)
 {
-	int x = 0, y = 0;
-	t_complex z, tmp;
-	int iterations;
-	t_pixel pixel;
+	t_complex	z;
+	t_complex	tmp;
 
-	while (y < HEIGHT)
+	z.real = (julia->x - WIDTH / 2) * (2.0 / data->zoom) / WIDTH;
+	z.imag = (julia->y - HEIGHT / 2) * (2.0 / data->zoom) / HEIGHT;
+	julia->iterations = 0;
+	while (julia->iterations < 1000)
 	{
-		x = 0;
-		while (x < WIDTH)
+		tmp.real = z.real * z.real - z.imag
+			* z.imag + julia->constant.real;
+		tmp.imag = 2 * z.real * z.imag + julia->constant.imag;
+		z = tmp;
+		julia->iterations++;
+		if (z.real * z.real + z.imag * z.imag > 4.0)
+			break ;
+	}
+}
+
+void	draw_julia(char *image, t_fractal *julia, t_data *data)
+{
+	t_pixel		pixel;
+
+	while (julia->y < HEIGHT)
+	{
+		julia->x = 0;
+		while (julia->x < WIDTH)
 		{
-			z.real = (x - WIDTH / 2) * (2.0 / data->zoom) / WIDTH;
-			z.imag = (y - HEIGHT / 2) * (2.0 / data->zoom) / HEIGHT;
-
-			iterations = 0;
-
-			while (iterations < 1000)
-			{
-				tmp.real = z.real * z.real - z.imag * z.imag + julia->constant.real;
-				tmp.imag = 2 * z.real * z.imag + julia->constant.imag;
-				z = tmp;
-				iterations++;
-
-				if (z.real * z.real + z.imag * z.imag > 4.0)
-					break;
-			}
-
-			set_color_julia(&pixel, iterations);
-
-			pixel.x = x;
-			pixel.y = y;
+			calculate_julia(julia, data);
+			set_color_julia(&pixel, julia->iterations);
+			pixel.x = julia->x;
+			pixel.y = julia->y;
 			pixel.color = (pixel.red << 16) | (pixel.green << 8) | pixel.blue;
-
 			put_pixel_image(pixel, image, WIDTH);
-
-			x++;
+			julia->x++;
 		}
-		y++;
+		julia->y++;
 	}
 }
