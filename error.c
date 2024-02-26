@@ -6,20 +6,16 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:32:26 by tguerran          #+#    #+#             */
-/*   Updated: 2024/02/15 16:43:06 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:46:57 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int checkerror(int argc, char *argv[])
+int	checkerror_2(char *argv[])
 {
-	if (argc <= 1 || argc > 4)
-	{
-		error_command();
-		return (0);
-	}
-	else if ((ft_strcmp(argv[1], "mandelbrot") != 0) && (ft_strcmp(argv[1], "julia") != 0))
+	if ((ft_strcmp(argv[1], "mandelbrot") != 0)
+		&& (ft_strcmp(argv[1], "julia") != 0))
 	{
 		error_list(argv[1]);
 		return (0);
@@ -43,7 +39,21 @@ int checkerror(int argc, char *argv[])
 	return (1);
 }
 
-void error_command(void)
+int	checkerror(int argc, char *argv[])
+{
+	if (argc <= 1 || argc > 4)
+	{
+		error_command();
+		return (0);
+	}
+	if (checkerror_2(argv) == 0)
+	{
+		return (0);
+	}
+	return (1);
+}
+
+void	error_command(void)
 {
 	ft_printf("----RAPPEL DES COMMANDES---- \n");
 	ft_printf(" | | | | | | | | | | | | | | \n");
@@ -53,7 +63,7 @@ void error_command(void)
 	ft_printf(" | | | | | | | | | | | | | | \n");
 }
 
-void error_list(char *str)
+void	error_list(char *str)
 {
 	ft_printf(" | | | | | | | | | | | | | | \n");
 	ft_printf("---- %s N'EST PAS RECONNU ----\n", str);

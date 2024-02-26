@@ -6,13 +6,13 @@
 #    By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 11:30:12 by tguerran          #+#    #+#              #
-#    Updated: 2024/02/26 01:18:49 by tguerran         ###   ########.fr        #
+#    Updated: 2024/02/26 16:16:44 by tguerran         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra 
 
 SRC = fractol.c \
 		fractol_utils.c \
@@ -23,7 +23,7 @@ SRC = fractol.c \
 		color.c \
 		error.c \
 
-MLX_PATH = /home/tguerran/Bureau/fract-ol/minilibx-linux
+MLX_PATH = /home/tguerran/Desktop/utils/minilibx-linux
 MLX_LIB = -L$(MLX_PATH) -lmlx -lX11 -lXext -lm
 MLX_INC = -I$(MLX_PATH)
 
