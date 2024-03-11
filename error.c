@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:32:26 by tguerran          #+#    #+#             */
-/*   Updated: 2024/03/11 16:05:35 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:14:04 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@ int	checkerror_2(char *argv[])
 {
 	if (ft_strcmp(argv[1], "mandelbrot") == 0)
 	{
-		if (argv[2] != NULL) {
-			error_list("mandelbrot ne prend pas de paramètres supplémentaires.");
+		if (argv[2] != NULL)
+		{
+			error_list("mandelbrot ne prend pas de paramètres supplémentaires");
 			return (0);
 		}
-	} 
+	}
 	else if (ft_strcmp(argv[1], "julia") == 0)
 	{
 		if (argv[2] == NULL || argv[3] == NULL)
@@ -29,17 +30,14 @@ int	checkerror_2(char *argv[])
 			return (0);
 		}
 		if (ft_isalpha(argv[2][0]) == 1 || ft_isalpha(argv[3][0]) == 1)
-		{
-			error_list("Les paramètres pour julia doivent être des nombres valides.");
 			return (0);
-		}
 	}
 	else
 	{
 		error_list("Argument non reconnu.");
 		return (0);
-    }
-    return (1);
+	}
+	return (1);
 }
 
 int	checkerror(int argc, char *argv[])
