@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:30:37 by tguerran          #+#    #+#             */
-/*   Updated: 2024/02/23 14:02:12 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:14:53 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,18 @@ void	drawfractal(char *argv[], t_data *data)
 		data->fractal = 1;
 		if (argv[2] && argv[3])
 		{
-			initialize_julia(&fractal, ft_atof(argv[2]), ft_atof(argv[3]));
 			data->param1 = ft_atof(argv[2]);
 			data->param2 = ft_atof(argv[3]);
-		}
-		else
-		{
-			data->param1 = -0.8;
-			data->param2 = 0.156;
 			initialize_julia(&fractal, data->param1, data->param2);
+			draw_julia(data->img_str, &fractal, data);
 		}
-		draw_julia(data->img_str, &fractal, data);
+		// else
+		// {
+		// 	data->param1 = -0.8;
+		// 	data->param2 = 0.156;
+		// 	initialize_julia(&fractal, data->param1, data->param2);
+		// }
+		// draw_julia(data->img_str, &fractal, data);
 	}
 }
 
