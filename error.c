@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:32:26 by tguerran          #+#    #+#             */
-/*   Updated: 2024/03/11 16:14:04 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:43:27 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,12 @@ int	checkerror_2(char *argv[])
 	}
 	else if (ft_strcmp(argv[1], "julia") == 0)
 	{
-		if (argv[2] == NULL || argv[3] == NULL)
+		if (argv[2] == NULL || argv[3] == NULL
+			|| ft_isalpha(argv[2][0]) || ft_isalpha(argv[3][0]))
 		{
-			error_list("julia nécessite deux paramètres supplémentaires.");
+			error_list("julia nécessite deux paramètres avec des chiffres");
 			return (0);
 		}
-		if (ft_isalpha(argv[2][0]) == 1 || ft_isalpha(argv[3][0]) == 1)
-			return (0);
 	}
 	else
 	{
