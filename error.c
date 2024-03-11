@@ -6,7 +6,7 @@
 /*   By: tguerran <tguerran@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:32:26 by tguerran          #+#    #+#             */
-/*   Updated: 2024/02/26 12:46:57 by tguerran         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:05:35 by tguerran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,32 @@
 
 int	checkerror_2(char *argv[])
 {
-	if ((ft_strcmp(argv[1], "mandelbrot") != 0)
-		&& (ft_strcmp(argv[1], "julia") != 0))
+	if (ft_strcmp(argv[1], "mandelbrot") == 0)
 	{
-		error_list(argv[1]);
-		return (0);
-	}
-	else if (argv[2])
-	{
-		if (ft_isdigit(atof(argv[2])) == 1)
-		{
-			error_list(argv[2]);
+		if (argv[2] != NULL) {
+			error_list("mandelbrot ne prend pas de paramètres supplémentaires.");
 			return (0);
 		}
-		if (argv[3])
+	} 
+	else if (ft_strcmp(argv[1], "julia") == 0)
+	{
+		if (argv[2] == NULL || argv[3] == NULL)
 		{
-			if (ft_isdigit(atof(argv[3])) == 1)
-			{
-				error_list(argv[3]);
-				return (0);
-			}
+			error_list("julia nécessite deux paramètres supplémentaires.");
+			return (0);
+		}
+		if (ft_isalpha(argv[2][0]) == 1 || ft_isalpha(argv[3][0]) == 1)
+		{
+			error_list("Les paramètres pour julia doivent être des nombres valides.");
+			return (0);
 		}
 	}
-	return (1);
+	else
+	{
+		error_list("Argument non reconnu.");
+		return (0);
+    }
+    return (1);
 }
 
 int	checkerror(int argc, char *argv[])
@@ -58,7 +61,6 @@ void	error_command(void)
 	ft_printf("----RAPPEL DES COMMANDES---- \n");
 	ft_printf(" | | | | | | | | | | | | | | \n");
 	ft_printf("-mandelbrot \n");
-	ft_printf("-julia \n");
 	ft_printf("-julia (param1) (param2)\n");
 	ft_printf(" | | | | | | | | | | | | | | \n");
 }
@@ -66,7 +68,7 @@ void	error_command(void)
 void	error_list(char *str)
 {
 	ft_printf(" | | | | | | | | | | | | | | \n");
-	ft_printf("---- %s N'EST PAS RECONNU ----\n", str);
+	ft_printf("---- %s ----\n", str);
 	ft_printf(" | | | | | | | | | | | | | | \n");
 	error_command();
 }
